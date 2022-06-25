@@ -11,11 +11,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //以下を追記
-        DB::table('posts')->insert([
-            ['username' => 'Miyu'],
-            ['password' => 'nm19971019'],
-            ['mail' => 'Miyu@lull-inc.com']
-        ]);
+        //ここにDBの内容を記述していく
     }
 }
