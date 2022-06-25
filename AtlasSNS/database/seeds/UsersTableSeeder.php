@@ -12,10 +12,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //以下を追記
-        DB::table('posts')->insert([
+        DB::table('users')->insert([
+            ['ID' => ''],
             ['username' => 'Miyu'],
+            ['mail' => 'Miyu@lull-inc.com'],
             ['password' => 'nm19971019'],
-            ['mail' => 'Miyu@lull-inc.com']
+            ['bio' => ''],
+            ['images' => ''],
+            ['created_at' => ''],
+            ['update_at' => '']
         ]);
     }
 }
