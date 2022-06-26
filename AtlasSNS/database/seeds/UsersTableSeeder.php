@@ -13,14 +13,10 @@ class UsersTableSeeder extends Seeder
     {
         //以下を追記
         DB::table('users')->insert([
-            ['ID' => ''],
-            ['username' => 'Miyu'],
-            ['mail' => 'Miyu@lull-inc.com'],
-            ['password' => 'nm19971019'],
-            ['bio' => ''],
-            ['images' => ''],
-            ['created_at' => ''],
-            ['update_at' => '']
+            'username' => 'Miyu',
+            'mail' => 'MiyuNakayama@lull-inc.com',
+            'password' => 'nm19971019',
+            'bio' => 'Miyuです。',
         ]);
     }
 }
