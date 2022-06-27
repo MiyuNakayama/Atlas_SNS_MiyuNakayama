@@ -8,6 +8,8 @@ class PostsController extends Controller
 {
     //
     public function index(){
-        return view('posts.index');
+        //次はこっからだよ〜$listのやつ
+        $list = \DB::tabel('users')->get();
+        return view('posts.index',['list'=>$list]);
     }
 }
