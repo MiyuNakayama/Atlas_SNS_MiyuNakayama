@@ -2,7 +2,8 @@
 
 @section('content')
 
-{!! Form::open() !!}
+{!! Form::open(['url' => '/register']) !!}
+<!--↑新規登録/登録後のページ遷移先の変更。新規ユーザー登録するページへの移行。web.phpでryーティングを確認しurlを追記。-->
 
 <h2>新規ユーザー登録</h2>
 

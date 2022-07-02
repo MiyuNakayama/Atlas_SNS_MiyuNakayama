@@ -20,9 +20,10 @@
 
 
 //ログアウト中のページ
+//ログイン画面
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
-
+//新規登録
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
