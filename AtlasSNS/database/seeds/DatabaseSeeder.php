@@ -13,5 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         //クオーテーションの付けない。$this->call('UsersTableSeeder::class');
+
+        //FollowsTableSeeder
     }
 }
