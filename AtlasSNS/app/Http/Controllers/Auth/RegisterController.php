@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -46,12 +46,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    //ここで新規ユーザーの登録条件を記述している
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'username' => 'required|string|max:255',
             'mail' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:4|confirmed',
+            'password_confirmation' => 'min:4',
         ]);
     }
 
@@ -78,13 +81,24 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
+//dd($data);
+            $validator = $this->validator($data);
+            if ($validator->fails()){
+                return redirect('register')///行き先を変更してあげよう！！！
+                ->withErrors($validator)
+                ->withInput();
+                //$validator = $this->validator($data);の$validatarは、一旦記述してあげないとエラーが出てしまうので記述する。
+            }
 
             $this->create($data);
-            return redirect('added');
-        }
-        return view('auth.register');
-    }
+            //セミコロンすれば連続でメゾット発動できるよ
+            return redirect('added')->with('username',$data['username']);
+            //withじゃないよ多分compact、
 
+}
+        return view('auth.register');
+
+    }
     public function added(){
         return view('auth.added');
     }

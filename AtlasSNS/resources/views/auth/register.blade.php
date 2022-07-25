@@ -2,6 +2,19 @@
 
 @section('content')
 
+<!--↓バリデーションで引っ掛かるとエラーメッセージが表示される-->
+<div>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+</div>
+
 {!! Form::open(['url' => '/register']) !!}
 <!--↑新規登録/登録後のページ遷移先の変更。新規ユーザー登録するページへの移行。urlを追記。-->
 
@@ -17,7 +30,8 @@
 {{ Form::text('password',null,['class' => 'input']) }}
 
 {{ Form::label('パスワード確認') }}
-{{ Form::text('password-confirm',null,['class' => 'input']) }}
+{{ Form::text('password_confirmation',null,['class' => 'password_confirmation']) }}
+<!--↑クラス名を修正したい。修正しないとパスワーどの確認が延々と続く-->
 
 {{ Form::submit('登録') }}
 
