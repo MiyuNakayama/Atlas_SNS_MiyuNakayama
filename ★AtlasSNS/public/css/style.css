@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+html {}
+
+body {}
+
+/* header */
+header {
+    background: #186AC9;
+    height: 70px;
+}
+
+#row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#container {
+    flex: 0 0 80%;
+}
+
+/*Atlasロゴ*/
+#head h1 {
+    display: block;
+    left: 0;
+    padding: 20px 20px;
+    height: 10px;
+}
+
+#head img {
+    height: 30px;
+}
+
+.display-container {
+    display: flex;
+    justify-content: space-between;
+    /*両端寄せって意味！*/
+}
+
+.ac-menu {
+    flex: 0 0 19%;
+}
+
+.ac-parent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ac-arrow {
+    transform: rotate(90deg);
+}
+
+.ac-arrow:active {
+    transform: rotate(-90deg);
+}
+
+.ac-child {
+    /*閉じているとき*/
+    display: none;
+}
+
+.ac-child::before {
+    /*開いているとき*/
+    display: block;
+}
+
+#side-bar {
+    flex: 0 0 19%;
+    border-left: 1px solid #727272;
+}
+
+.btn {
+    background-color: #186AC9;
+    width: 100px;
+    height: 50px;
+}
