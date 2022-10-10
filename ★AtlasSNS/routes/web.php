@@ -40,9 +40,10 @@ Route::post('/added', 'Auth\RegisterController@added');
 //▼ログイン中のページ
 //middlewareで、認証Authされているユーザーしか閲覧ができない設定にする
 Route::group(['middleware' => 'auth'], function () {
-
+//top表示のためのルーティング
 Route::get('/top','PostsController@index');
 
+//▼プロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
@@ -51,7 +52,13 @@ Route::get('/followlist','FollowsController@followList');
 
 Route::get('/followerlist','FollowsController@followerList');
 
+//▼新規投稿のルーティングをかく！
+///text/createは、ブラウザ表示URLではなく、投稿内容登録に使うメゾット名
+Route::post('/text/create', 'PostsController@textCreate');
+
+//10/10追記
+Route::post('/post/user', 'PostsController@postUser');
+});
+
 //ログアウト（作成中）
 Route::get('/logout', 'Auth\LoginController@logout');
-
-});

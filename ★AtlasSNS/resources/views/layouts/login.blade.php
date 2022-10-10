@@ -29,9 +29,10 @@
                     <div class="ac-menu">
                         <div class="ac-parent"><!--ac親要素 child開く時はここがactiveになる-->
                         <p>{{ Auth::user()->username }}さん</p>
-                        <div class= "ac-arrow">></div>
+                        <div class= "ac-arrow"></div>
                         <img src="images/icon4.png">
                         </div>
+
                         <div class="ac-child"><!--ac子要素-->
                         <ul>
                             <li><a href="/top">ホーム</a></li>
@@ -52,25 +53,25 @@
         <!--サイドバーの内容-->
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ Auth::user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="followlist">フォローリスト</a></p>
+                <p class="btn"><a href="/followlist">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="followerlist">フォロワーリスト</a></p>
+                <p class="btn"><a href="/followerlist">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="search">ユーザー検索</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="js/style.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/style.js"></script>
     <!--外部から引っ張ってきたよ-->
 </body>
 </html>

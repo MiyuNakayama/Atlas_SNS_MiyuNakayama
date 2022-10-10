@@ -4,10 +4,11 @@ html {}
 
 body {}
 
-/* header */
+/*** header ***/
 header {
     background: #186AC9;
     height: 70px;
+    z-index: 3;
 }
 
 #row {
@@ -38,20 +39,60 @@ header {
 }
 
 .ac-menu {
-    flex: 0 0 19%;
+    color: #fff;
+    z-index: 5;
 }
 
 .ac-parent {
-    display: flex;
+    display: table;
     justify-content: space-between;
+    right: 0;
+    padding: 20px 20px;
+}
+
+.ac-parent p {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .ac-arrow {
-    transform: rotate(90deg);
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin: 10px;
 }
 
-.ac-arrow:active {
-    transform: rotate(-90deg);
+/*＞矢印は記号を入れずにCSSで作成する方が綺麗*/
+.ac-arrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0px;
+    border-top: solid 2px #fff;
+    border-left: solid 2px #fff;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
+}
+
+.ac-arrow.active::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0px;
+    border-bottom: solid 2px #fff;
+    border-right: solid 2px #fff;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
 }
 
 .ac-child {
@@ -59,18 +100,65 @@ header {
     display: none;
 }
 
-.ac-child::before {
+.ac-child.active {
     /*開いているとき*/
     display: block;
+    width: 0 0 19%;
+    background-color: #fff;
+}
+
+.ac-child li {
+    border: solid 1.5px #186AC9;
+    padding: 20px;
+    text-align: center;
+}
+
+.ac-child li:hover {
+    background-color: #186AC9;
 }
 
 #side-bar {
-    flex: 0 0 19%;
+    display: block;
+    width: 19%;
+    height: auto;
     border-left: 1px solid #727272;
 }
 
+#confirm p {
+    z-index: 1;
+}
+
 .btn {
-    background-color: #186AC9;
+    /* background-color: #186AC9; */
     width: 100px;
     height: 50px;
+}
+
+/*** header ***/
+
+/*** 投稿form ***/
+
+.newpost {
+    display: flex;
+    padding: 20px;
+    border-bottom: 7px solid lightgray;
+}
+
+.newpost img {
+    height: 30px;
+}
+
+textarea {
+    resize: none;
+    padding: 20px;
+    margin: 10px;
+    width: 500px;
+    height: 100px;
+    border: none;
+    outline: none;
+}
+
+.input image {
+    display: flex;
+    padding-top: 10px;
 }
