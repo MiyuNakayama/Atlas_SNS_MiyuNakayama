@@ -48,16 +48,25 @@ Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
 
-Route::get('/followlist','FollowsController@followList');
+Route::get('/followList','FollowsController@followList');
 
-Route::get('/followerlist','FollowsController@followerList');
+Route::get('/followerList','FollowsController@followerList');
 
 //▼新規投稿のルーティングをかく！
 ///text/createは、ブラウザ表示URLではなく、投稿内容登録に使うメゾット名
 Route::post('/text/create', 'PostsController@textCreate');
 
 //10/10追記
+//ブラウザに表示させる動き
+//postmodelに書かれている、userメゾットも一緒に情報を取得するよ
 Route::post('/post/user', 'PostsController@postUser');
+
+//10/22追記
+//投稿内容の編集・更新
+Route::get('/post/{id}/updateForm', 'PostsController@updateForm');
+Route::post('/top', 'PostsController@update');
+
+
 });
 
 //ログアウト（作成中）

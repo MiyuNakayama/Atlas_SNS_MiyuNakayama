@@ -86,7 +86,7 @@ class RegisterController extends Controller
                 return redirect('register')///行き先を変更してあげよう！！！login→registerに変更。バリデーションに引っ掛かると再度registerが読み込まれるようになっているぞ〜
                 ->withErrors($validator)
                 ->withInput();
-                //$validator = $this->validator($data);の$validatarは、一旦記述してあげないとエラーが出てしまうので記述する。
+                //$validator = $this->validator($data);の$validatorは、一旦記述してあげないとエラーが出てしまうので記述する。
             }
 
             $this->create($data);

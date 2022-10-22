@@ -134,17 +134,17 @@ header {
     height: 50px;
 }
 
-/*** header ***/
+/*** header-end ***/
 
-/*** 投稿form ***/
+/*** 投稿form:newPost ***/
 
-.newpost {
+.newPost {
     display: flex;
     padding: 20px;
     border-bottom: 7px solid lightgray;
 }
 
-.newpost img {
+.newPost img {
     height: 30px;
 }
 
@@ -161,4 +161,47 @@ textarea {
 .input image {
     display: flex;
     padding-top: 10px;
+}
+
+/*** 投稿form-end ***/
+
+/*** 投稿フォーム閲覧部分:postArea ***/
+.postsArea {
+    display: flex;
+}
+
+.flexbox {
+    flex-direction: column-reverse;
+    /* 下寄せ、下から並ぶような設定*/
+}
+
+/*.display-containerについてはすでにlogin.bladeの作成時に記載済みなのでここでは記載しない*/
+
+.p {}
+
+.postUsername {
+    display: flex;
+    padding-top: 10px;
+    padding-left: 40px;
+}
+
+.postCreated_at {
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+
+.postPost {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    width: 70%;
+    padding: 0 50px 0 50px;
+    /*ここらへん後で直したい*/
+}
+
+.postButtons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
 }
