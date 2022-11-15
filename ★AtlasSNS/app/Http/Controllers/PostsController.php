@@ -60,16 +60,16 @@ class PostsController extends Controller
 
 //update-form(投稿内容の編集・更新)
         public function updateForm($id){
-
         $post = \DB::table('posts')
             ->where('id', $id)
             //$idの変数名は、ルーティング上の{id}と同じ名前にする。$numberなら{number}など。など。。
             ->first();
         return view('posts.updateForm', compact('post'));
     }
-
+//投稿編集③web.phpで指定されたメゾットへ。modalで編集した投稿内容をrequestで取得し、idとupPostに振り分ける
     public function update(Request $request)
     {
+        // dd($request);
         $id = $request->input('id');
         $up_post = $request->input('upPost');
         \DB::table('posts')
@@ -77,6 +77,16 @@ class PostsController extends Controller
             ->update(
                 ['post' => $up_post]
             );//->update[]ここでDBの内容を更新している！
+
+        return redirect('top');
+    }
+
+    //投稿削除③
+    public function delete($id)
+    {
+        \DB::table('posts')
+            ->where('id', $id)
+            ->delete();
 
         return redirect('top');
     }

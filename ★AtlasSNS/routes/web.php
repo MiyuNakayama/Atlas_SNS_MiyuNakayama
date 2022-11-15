@@ -64,8 +64,18 @@ Route::post('/post/user', 'PostsController@postUser');
 //10/22追記
 //投稿内容の編集・更新
 Route::get('/post/{id}/updateForm', 'PostsController@updateForm');
-Route::post('/top', 'PostsController@update');
+//11/8追記
+//投稿編集②formでおくされてきた投稿内容を処理するメゾットを決める。PostsControllerへ行くよ
+Route::post('/update',
+'PostsController@update');
 
+//11/8追記
+//投稿の削除
+Route::get('/post/{id}/delete', 'PostsController@delete');
+
+//11/12追記
+Route::get('/wordSearch', 'UsersController@wordSearch');
+// ->name('wordSearch.search')
 
 });
 

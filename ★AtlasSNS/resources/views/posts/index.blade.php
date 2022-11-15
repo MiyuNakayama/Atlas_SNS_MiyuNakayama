@@ -1,5 +1,4 @@
 @extends('layouts.login')
-
 @section('content')
 <div>
   @if ($errors->any())
@@ -10,7 +9,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
 </div>
 
 <div class="newPost">
@@ -36,16 +35,34 @@
                 <p class = postPost>{{ $list->post }}</p>
 
                 <div class= "postButtons">
-                  <a href="/post/{{$list->id}}/update-form">
-                    <input type="image" src="/images/edit.png" name="editButton" width="30px" hight="30px">
-                  </a>
-                  <a href="/post/{{$list->id}}/delete">
-                    <!--削除機能はこれから書くうううう-->
+                  <!--投稿編集前のデフォルトページ-->
+                  <!--投稿編集button-->
+                  <a class="js-modal-open" href="" post="{{ $list->post }}" post_id="{{ $list->id }}"><input type="image" src="/images/edit.png" name="editButton" width="30px" hight="30px"></a><!--postとpost_idどちらの情報も持たせる-->
+
+                  <!--投稿削除button-->
+                  <!--投稿削除①削除ボタンをおす→はいを選択する-->
+                  <a class="deleteButton" href="/post/{{$list->id}}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
                     <input type="image" src="/images/trash.png" name="trashButton" width="30px" hight="30px">
                   </a>
                 </div>
             @endforeach
-        </table>
-</div>
-</div>
+          </table>
+          </div>
+        </div>
+
+        <!--モーダルの中身-->
+        <div class="modal js-modal">
+          <div class="modal__bg js-modal-close"></div>
+          <div class="modal__content">
+            <!--投稿編集①更新内容が送られる。データはweb.phpにいくよ-->
+            <form action="/update" method="post"><!--↑ここのURLの指定は自由でOK。今回は/updateにしたよ。送り方はpost送信。-->
+                <textarea name="upPost" class="modal_post"></textarea>
+                <input type="hidden" name="id" class="modal_id" value="">
+                <input type="image" src="/images/edit.png" name="editButton" width="30px" hight="30px">
+                {{ csrf_field() }}
+           </form>
+           <a class="js-modal-close" href=""></a>
+          </div>
+        </div>
+
 @endsection
