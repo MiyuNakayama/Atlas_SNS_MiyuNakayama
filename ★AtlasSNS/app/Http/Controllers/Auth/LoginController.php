@@ -48,7 +48,7 @@ class LoginController extends Controller
                 return redirect('top');// ログインが成功したら、トップページへ飛ぶように設定。
             }
         }
-        return view("auth.login");
+        return view('auth.login');
     }
 
     public function logout() {

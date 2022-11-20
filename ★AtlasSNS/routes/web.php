@@ -46,8 +46,6 @@ Route::get('/top','PostsController@index');
 //▼プロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@search');
-
 Route::get('/followList','FollowsController@followList');
 
 Route::get('/followerList','FollowsController@followerList');
@@ -73,10 +71,15 @@ Route::post('/update',
 //投稿の削除
 Route::get('/post/{id}/delete', 'PostsController@delete');
 
-//11/12追記
-Route::get('/wordSearch', 'UsersController@wordSearch');
-// ->name('wordSearch.search')
 
+//11/17追記
+//ユーザー検索①ページの全ユーザーの表示
+Route::get('/search','UsersController@search');
+//11/12追記
+//ユーザー検索②DBから曖昧検索されたワードを探す
+Route::get('/wordSearch', 'UsersController@wordSearch');
+//ユーザー検索③
+//Route::get('/searchWord', 'UsersController@searchWord');
 });
 
 //ログアウト（作成中）

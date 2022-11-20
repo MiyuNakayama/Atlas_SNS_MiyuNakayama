@@ -98,6 +98,7 @@ class RegisterController extends Controller
         return view('auth.register');
 
     }
+
     public function added(){
         return view('auth.added');
     }
