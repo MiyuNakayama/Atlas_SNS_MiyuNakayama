@@ -37,7 +37,7 @@ class PostsController extends Controller
             }
 
         $user_id = Auth::user()->id;
-        // 後々ユーザーアイコンも取得するのかな。。
+        //後々ユーザーアイコンも取得するのかな。。
         //ログインしてるユーザーの情報を取得
         $post = $request->input('posts');
         \DB::table('posts')->insert([
@@ -53,7 +53,8 @@ class PostsController extends Controller
 //投稿内容をブラウザに表示させる動き
     public function index(){
         //リレーション
-        $list = Post::with("user")->get();//postmodelに書かれている、userメゾットも一緒に情報を取得する
+        $list = Post::with("user")->get();
+        //postmodelに書かれている、userメゾットも一緒に情報を取得する
 //dd($list);
         return view('posts.index',['list'=>$list]);
         }
