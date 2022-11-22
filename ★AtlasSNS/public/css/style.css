@@ -242,4 +242,26 @@ textarea {
 
 /*** modal js-modal-end ***/
 
-/*** ユーザー検索: ***/
+/*** ユーザー検索：search ***/
+/** ユーザー検索窓：searchArea **/
+
+.search-container {
+    /*  */
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px;
+    padding: 20px;
+}
+
+.searchArea text image {
+    align-items: stretch;
+    /* 中央揃えにしたいよ〜 */
+}
+
+.allUsername {
+    position: center;
+}
