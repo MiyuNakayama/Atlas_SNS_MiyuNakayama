@@ -11,7 +11,8 @@ class UsersController extends Controller
     public function profile(){
         return view('users.profile');
     }
-//ユーザー検索①検索前の全ユーザーの表示
+
+    //ユーザー検索①検索前の全ユーザーの表示
     public function search(){
         $users = User::get();
         //User::→Userモデルを経由して値をgetしてる
@@ -26,9 +27,9 @@ class UsersController extends Controller
 //②と同様のメゾットを使用する
     public function wordSearch(Request $request)
     {
-        // dd($request);
+    //dd($request);
         $searchWord = $request->input('searchWord');//inputの中身は検索にかけられたsearchWordが入っているはず。。
-//dd($searchWord);
+    //dd($searchWord);
         if(!empty($searchWord))
         {
             $users = User::where('username','like','%'.$searchWord.'%')->get();
@@ -38,7 +39,7 @@ class UsersController extends Controller
         else{
             $users = User::get();//検索して該当するユーザーがない場合は再度全選択する
         }
-//②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
+        //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
          return view('users.search',['users'=>$users,'searchWord'=>$searchWord]);
 
     }

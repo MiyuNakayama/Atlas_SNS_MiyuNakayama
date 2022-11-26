@@ -37,7 +37,8 @@
                 <div class= "postButtons">
                   <!--投稿編集前のデフォルトページ-->
                   <!--投稿編集button-->
-                  <a class="js-modal-open" href="" post="{{ $list->post }}" post_id="{{ $list->id }}"><input type="image" src="/images/edit.png" name="editButton" width="30px" hight="30px"></a><!--postとpost_idどちらの情報も持たせる-->
+                  <a class="js-modal-open" href="" post="{{ $list->post }}" post_id="{{ $list->id }}"><input type="image" src="/images/edit.png"
+                  name="editButton" width="30px" hight="30px"></a><!--postとpost_idどちらの情報も持たせる-->
 
                   <!--投稿削除button-->
                   <!--投稿削除①削除ボタンをおす→はいを選択する-->

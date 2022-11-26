@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /*投稿機能、投稿の編集時に使用*/
     public function posts(){
     return $this->hasMany('App\Post');
     //Postテーブルとリレーション
-
-    
 }
+    
 }

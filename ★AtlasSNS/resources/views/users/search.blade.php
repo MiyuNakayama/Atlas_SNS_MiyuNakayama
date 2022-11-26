@@ -3,8 +3,7 @@
 
 <div id = "search-container">
 <div class = "search">
-  <div class = "searchArea">
-  <!--ユーザー検索の検索窓-->
+  <div class = "searchArea"><!--ユーザー検索の検索窓-->
     <form action="/wordSearch" method="GET"><!--行き先のURLを指定-->
     <input type ="text" name="searchWord" placeholder ="ユーザー名">
     <input type="image" src="/images/post.png" name="searchWordButton" width="60px" hight="60px">
@@ -22,6 +21,7 @@
 <div class = "allUsers-container">
 @foreach ($users as $user)
   <div class = "allUsername">{{ $user->username }}</div>
+  <input type="followButton" value ="フォローする">
 @endforeach
 </div>
 </div>

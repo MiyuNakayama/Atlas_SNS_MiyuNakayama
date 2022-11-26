@@ -64,8 +64,7 @@ Route::post('/post/user', 'PostsController@postUser');
 Route::get('/post/{id}/updateForm', 'PostsController@updateForm');
 //11/8追記
 //投稿編集②formでおくされてきた投稿内容を処理するメゾットを決める。PostsControllerへ行くよ
-Route::post('/update',
-'PostsController@update');
+Route::post('/update','PostsController@update');
 
 //11/8追記
 //投稿の削除
@@ -77,9 +76,9 @@ Route::get('/post/{id}/delete', 'PostsController@delete');
 Route::get('/search','UsersController@search');
 //11/12追記
 //ユーザー検索②DBから曖昧検索されたワードを探す
-Route::get('/wordSearch', 'UsersController@wordSearch');
-//ユーザー検索③
-//Route::get('/searchWord', 'UsersController@searchWord');
+//ユーザー検索③検索窓横の検索ワードの表示
+Route::get('/wordSearch','UsersController@wordSearch');
+
 });
 
 //ログアウト（作成中）
