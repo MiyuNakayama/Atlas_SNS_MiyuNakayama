@@ -11,7 +11,10 @@
   </div>
   <!--ユーザー検索③検索窓横の検索ワードの表示-->
   <div class = "searchWord">
+    @if($searchWord != null)
     <h2>検索ワード：{{ $searchWord }}</h2>
+    @endif
+    <!--bladeに記述できるif関数。検索ワードがnullでなければsearchWordを表示する。！＝は不一致（型とか関係なくとにかく一致しない）の時。-->
   </div>
 </div>
 
