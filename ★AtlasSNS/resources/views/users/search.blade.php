@@ -7,16 +7,15 @@
     <form action="/wordSearch" method="GET"><!--行き先のURLを指定-->
     <input type ="text" name="searchWord" placeholder ="ユーザー名">
     <input type="image" src="/images/post.png" name="searchWordButton" width="60px" hight="60px">
-  </form>
-</div>
-
-<!--ユーザー検索③検索窓横の検索ワードの表示-->
-<div class = "searchWord">
-  @if( $searchWord != null )
-  <h2>検索ワード：{{ $searchWord }}</h2>
+    </form>
+    <!--ユーザー検索③検索窓横の検索ワードの表示-->
+    <div class = "searchWord">
+      @if( isset($searchWord) )
+  <h2>検索ワード：{{ $searchWord }} </h2>
   @endif
-  <!--bladeに記述できるif関数。検索ワードがnullでなければsearchWordを表示する。！＝は不一致（型とか関係なくとにかく一致しない）の時。-->
-</div>
+    </div>
+    <!--bladeに記述できるif関数。検索ワードが存在すればsearchWordを表示する。-->
+  </div>
 </div>
 
 <!--ユーザー検索①全ユーザーの表示-->
@@ -24,8 +23,13 @@
 <div class = "allUsers-container">
 @foreach ($users as $user)
   <div class = "allUsername">{{ $user->username }}</div>
-  <input type="submit" name="followButton" value ="フォローする">
-@endforeach<!--繰り返し処理で表示させているユーザー情報は①も②も変数$usersを用いているので、表示させる部分は同一でOK-->
+
+  <!-- フォロー機能①フォローする、フォローを外すボタンの設置 -->
+
+  <input type ="submit" name ="followButton" value ="フォローする" method ="POST">
+  <!-- <input type="submit" name="followButton" value ="フォロー解除" method = "POST"> -->
+@endforeach
+<!--繰り返し処理で表示させているユーザー情報は①も②も変数$usersを用いているので、表示させる部分は同一でOK-->
 </div>
 </div>
 @endSection

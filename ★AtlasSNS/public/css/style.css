@@ -265,3 +265,15 @@ textarea {
 .allUsername {
     position: center;
 }
+
+/* 検索結果の表示：allUsers-container */
+.allUsers-container {
+    /* display: flex;
+    flex-wrap: wrap; */
+
+}
+
+.allUsername {
+    /* text-align: center;
+    display: inline-block; */
+}

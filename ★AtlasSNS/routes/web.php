@@ -79,6 +79,14 @@ Route::get('/search','UsersController@search');
 //ユーザー検索③検索窓横の検索ワードの表示
 Route::get('/wordSearch','UsersController@wordSearch');
 
+//11/28追記
+//フォロー機能
+//フォローする
+Route::post('/search','UsersController@follow');
+// Route::post('users/{user}/follow', [User::class, 'follow'])->name('follow');
+//フォロー外す
+Route::delete('/search','UsersController@delete');
+
 });
 
 //ログアウト（作成中）

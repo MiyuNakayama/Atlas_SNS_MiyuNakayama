@@ -16,7 +16,9 @@ class CreateFollowsTable extends Migration
         Schema::create('follows', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('following_id');
+            //自分がフォロー中のユーザー
             $table->integer('followed_id');
+            //自分をフォロー中のユーザー
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
         });

@@ -28,9 +28,13 @@ class UsersController extends Controller
     public function wordSearch(Request $request)
     {
     //dd($request);
-        $searchWord = $request->input('searchWord');//inputの中身は検索にかけられたsearchWordが入っているはず。。
+
+        $searchWord = $request->input('searchWord');
+        //inputされた中身は検索にかけられたsearchWordが入っているはず。。
+
     //dd($searchWord);
-        if(!empty($searchWord))
+
+        if(isset($searchWord))
         {
             $users = User::where('username','like','%'.$searchWord.'%')->get();
             //検索かけたら必ずget()して、結果の値を変数にぶち込みます
@@ -40,8 +44,54 @@ class UsersController extends Controller
             $users = User::get();//検索して該当するユーザーがない場合は再度全選択する
         }
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
-         return view('users.search',['users'=>$users,'searchWord'=>$searchWord]);
-
+         return view('users.search',['users'=> $users,'searchWord'=> $searchWord]);
     }
+
+
+
+//11/28追記
+//フォロー機能①ボタンの設置
+
+//フォロー機能②テーブルへの登録
+//フォローするとき（followテーブルへの登録処理）
+    public function follow(Request $request)
+    {
+        dd($request);
+        $user_id = Auth::user()->id;
+        //ログインしてるユーザーの情報を取得
+        $followed_id = $request->input('id');
+//dd($followed_id);
+        //post送信された内容をfollowsテーブルへ
+        \DB::table('follows')->insert([
+            'following_id' => $user_id,
+            'followed_id' => $followed_id
+        ]);//ここでテーブルにインサートする
+
+        return redirect('/search');
+    }
+
+
+public function delete(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        //ログインしてるユーザーの情報を取得
+        $followed_id = $request->input('id');
+//dd($followed_id);
+        //post送信された内容をfollowsテーブルへ
+        \DB::table('follows')->insert([
+            'following_id' => $user_id,
+            'followed_id' => $followed_id
+        ]);//ここでテーブルにインサートする
+
+        return redirect('/search');
+    }
+    // public function index(){
+    //     $followingUser = User::with("follows")->get();
+    //     //usermodelに書かれているfollowsメゾットを一緒に取得
+    //     return view('users.index',['followingUser'=>$followingUser]);
+    // }
+
+
+//フォローをはずすとき
 
 }

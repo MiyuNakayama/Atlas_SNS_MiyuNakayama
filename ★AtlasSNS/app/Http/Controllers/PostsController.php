@@ -67,6 +67,7 @@ class PostsController extends Controller
             ->first();
         return view('posts.updateForm', compact('post'));
     }
+
 //投稿編集③web.phpで指定されたメゾットへ。modalで編集した投稿内容をrequestで取得し、idとupPostに振り分ける
     public function update(Request $request)
     {
