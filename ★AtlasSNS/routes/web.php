@@ -82,10 +82,11 @@ Route::get('/wordSearch','UsersController@wordSearch');
 //11/28追記
 //フォロー機能
 //フォローする
-Route::post('/search','UsersController@follow');
-// Route::post('users/{user}/follow', [User::class, 'follow'])->name('follow');
+Route::post('/follow','FollowsController@follow');
+//12/18追記
 //フォロー外す
-Route::delete('/search','UsersController@delete');
+Route::post('/unFollow','FollowsController@unFollow');
+
 
 });
 

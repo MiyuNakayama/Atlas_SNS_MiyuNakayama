@@ -25,9 +25,20 @@
   <div class = "allUsername">{{ $user->username }}</div>
 
   <!-- フォロー機能①フォローする、フォローを外すボタンの設置 -->
+  <!-- どちらのボタンも作成し、その後正しい方を表示させる！ -->
 
-  <input type ="submit" name ="followButton" value ="フォローする" method ="POST">
-  <!-- <input type="submit" name="followButton" value ="フォロー解除" method = "POST"> -->
+<form action="/follow" method ="POST">
+  <input type ="submit" name ="follow" value ="フォローする" >
+  <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
+{{ csrf_field() }}
+</form>
+
+<form action="/unFollow" method ="POST">
+  <input type ="submit" name ="follow" value ="フォロー解除する">
+  <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
+{{ csrf_field() }}
+</form>
+
 @endforeach
 <!--繰り返し処理で表示させているユーザー情報は①も②も変数$usersを用いているので、表示させる部分は同一でOK-->
 </div>

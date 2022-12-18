@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -46,52 +47,5 @@ class UsersController extends Controller
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
          return view('users.search',['users'=> $users,'searchWord'=> $searchWord]);
     }
-
-
-
-//11/28追記
-//フォロー機能①ボタンの設置
-
-//フォロー機能②テーブルへの登録
-//フォローするとき（followテーブルへの登録処理）
-    public function follow(Request $request)
-    {
-        dd($request);
-        $user_id = Auth::user()->id;
-        //ログインしてるユーザーの情報を取得
-        $followed_id = $request->input('id');
-//dd($followed_id);
-        //post送信された内容をfollowsテーブルへ
-        \DB::table('follows')->insert([
-            'following_id' => $user_id,
-            'followed_id' => $followed_id
-        ]);//ここでテーブルにインサートする
-
-        return redirect('/search');
-    }
-
-
-public function delete(Request $request)
-    {
-        $user_id = Auth::user()->id;
-        //ログインしてるユーザーの情報を取得
-        $followed_id = $request->input('id');
-//dd($followed_id);
-        //post送信された内容をfollowsテーブルへ
-        \DB::table('follows')->insert([
-            'following_id' => $user_id,
-            'followed_id' => $followed_id
-        ]);//ここでテーブルにインサートする
-
-        return redirect('/search');
-    }
-    // public function index(){
-    //     $followingUser = User::with("follows")->get();
-    //     //usermodelに書かれているfollowsメゾットを一緒に取得
-    //     return view('users.index',['followingUser'=>$followingUser]);
-    // }
-
-
-//フォローをはずすとき
 
 }

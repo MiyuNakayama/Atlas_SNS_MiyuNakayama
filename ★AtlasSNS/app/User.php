@@ -52,6 +52,4 @@ class User extends Authenticatable
     }
     //引数1は使用するモデル、2は中間テーブル名、3は取得したい情報、4は余りを入れておく
 
-
-
 }
