@@ -34,22 +34,4 @@ class User extends Authenticatable
     //Postテーブルとリレーション
 }
 
-    /*フォローするはずすの時に使用*/
-    //11/28追記
-    //フォロー機能のリレーション
-
-    //自分がフォローしているユーザーを取得したい時のリレーション
-    public function follows()
-    {
-        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
-    }
-    //引数1は使用するモデル、2は中間テーブル名、3は取得したい情報、4は余りを入れておく
-
-    //自分のフォロワーを取得したい時のリレーション
-    public function followUsers()
-    {
-        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');
-    }
-    //引数1は使用するモデル、2は中間テーブル名、3は取得したい情報、4は余りを入れておく
-
 }

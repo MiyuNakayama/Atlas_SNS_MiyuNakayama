@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Follows;
 use Auth;
 
 class UsersController extends Controller
@@ -47,5 +48,6 @@ class UsersController extends Controller
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
          return view('users.search',['users'=> $users,'searchWord'=> $searchWord]);
     }
+
 
 }

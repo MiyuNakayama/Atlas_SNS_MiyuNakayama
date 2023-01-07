@@ -11,10 +11,10 @@
     <!--ユーザー検索③検索窓横の検索ワードの表示-->
     <div class = "searchWord">
       @if( isset($searchWord) )
+      <!--bladeに記述できるif関数。検索ワードが存在すればsearchWordを表示する。-->
   <h2>検索ワード：{{ $searchWord }} </h2>
   @endif
     </div>
-    <!--bladeに記述できるif関数。検索ワードが存在すればsearchWordを表示する。-->
   </div>
 </div>
 
@@ -27,11 +27,16 @@
   <!-- フォロー機能①フォローする、フォローを外すボタンの設置 -->
   <!-- どちらのボタンも作成し、その後正しい方を表示させる！ -->
 
+<!--　ログインユーザーのuser_idが、followsテーブルのfollowed_idに値がない -->
+@if(Auth()->user()->user_id = isset($following_id) && user()->user_id != empty($followed_id))
 <form action="/follow" method ="POST">
   <input type ="submit" name ="follow" value ="フォローする" >
   <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
 {{ csrf_field() }}
 </form>
+@endif
+
+<!-- ログインユーザーのuser_idが、following_idと一致 -->
 
 <form action="/unFollow" method ="POST">
   <input type ="submit" name ="follow" value ="フォロー解除する">
