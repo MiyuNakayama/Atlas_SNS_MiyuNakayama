@@ -30,6 +30,7 @@ class Follow extends Model
 //12/18追記
     // 自分がフォローしているか
     // している場合、followsテーブルのfollowed_idに一致する値がある
+    //判別するメゾット
     public function isFollowing(Int $user_id)
     {
         return (boolean) $this->follows()

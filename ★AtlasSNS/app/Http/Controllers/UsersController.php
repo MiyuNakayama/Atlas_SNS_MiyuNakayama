@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
 
     public function profile(){
-        return view('users.profile');
+        $username = return view('users.profile');
     }
 
     //ユーザー検索①検索前の全ユーザーの表示

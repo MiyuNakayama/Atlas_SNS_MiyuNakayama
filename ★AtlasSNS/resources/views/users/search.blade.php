@@ -27,22 +27,20 @@
   <!-- フォロー機能①フォローする、フォローを外すボタンの設置 -->
   <!-- どちらのボタンも作成し、その後正しい方を表示させる！ -->
 
-<!--　ログインユーザーのuser_idが、followsテーブルのfollowed_idに値がない -->
-@if(Auth()->user()->user_id = isset($following_id) && user()->user_id != empty($followed_id))
+<!--if(条件①ログインユーザーのidが、following_idと一致 && followed_idが、$user->idと一致)else(条件①以外の場合)-->
+@if(Auth()->isFollowing($user->id))
+<form action="/unFollow" method ="POST">
+  <input type ="submit" name ="follow" value ="フォロー解除する">
+  <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
+{{ csrf_field() }}
+</form>
+@else
 <form action="/follow" method ="POST">
   <input type ="submit" name ="follow" value ="フォローする" >
   <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
 {{ csrf_field() }}
 </form>
 @endif
-
-<!-- ログインユーザーのuser_idが、following_idと一致 -->
-
-<form action="/unFollow" method ="POST">
-  <input type ="submit" name ="follow" value ="フォロー解除する">
-  <input type="hidden" name="id" value= "{{$user->id}}" class="followsButton">
-{{ csrf_field() }}
-</form>
 
 @endforeach
 <!--繰り返し処理で表示させているユーザー情報は①も②も変数$usersを用いているので、表示させる部分は同一でOK-->
