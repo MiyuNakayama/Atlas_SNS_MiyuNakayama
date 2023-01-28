@@ -43,6 +43,11 @@ Route::group(['middleware' => 'auth'], function () {
 //top表示のためのルーティング
 Route::get('/top','PostsController@index');
 
+//1/23追記
+//フォロワー数の表示
+//loginでいいのかな
+Route::get('/login','FollowsController@Follower');
+
 //▼プロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
 
@@ -80,13 +85,12 @@ Route::get('/search','UsersController@search');
 Route::get('/wordSearch','UsersController@wordSearch');
 
 //11/28追記
-//フォロー機能
+//**フォロー機能
 //フォローする
 Route::post('/follow','FollowsController@follow');
 //12/18追記
 //フォロー外す
 Route::post('/unFollow','FollowsController@unFollow');
-
 
 });
 

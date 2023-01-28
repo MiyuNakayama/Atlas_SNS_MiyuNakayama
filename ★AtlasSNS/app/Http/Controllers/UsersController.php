@@ -11,7 +11,8 @@ class UsersController extends Controller
 {
 
     public function profile(){
-        $username = return view('users.profile');
+        $username = User::get();
+        return view('users.profile');
     }
 
     //ユーザー検索①検索前の全ユーザーの表示
@@ -47,6 +48,14 @@ class UsersController extends Controller
         }
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
          return view('users.search',['users'=> $users,'searchWord'=> $searchWord]);
+    }
+
+    //1/23追記
+    //まずはフォロワーの数を表示したい。
+    public function follower(){
+        $followers = Follows::get('followed_id')->count();
+
+        return redirect('/login');
     }
 
 

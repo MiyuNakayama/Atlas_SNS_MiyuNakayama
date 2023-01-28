@@ -4,13 +4,12 @@
 <div class = "profile">
   <h2>user name</h2><form action="/profile">
     <input type ="text" name="edit_userName">
-    {{}}
   </form>
   <h2>mail adress</h2><form action="/profile">
     <input type ="email" name="edit_mailAdress" placeholder ="">
   </form>
   <h2>password</h2><form action="/profile">
-    <input type ="password" name="" placeholder ="edit_password">
+    <input type ="password" name="" placeholder ="">
   </form>
   <h2>password comfirm</h2><form action="/profile">
     <input type ="passwordConfirmation" name="edit_passwordComfirmation" placeholder ="">
