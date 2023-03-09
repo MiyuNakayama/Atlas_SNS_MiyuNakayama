@@ -28,7 +28,7 @@
             @foreach ($list as $list)
             <!--ここら辺にアイコンがありそう-->
               <div class = display-container>
-                <div class = postUsername>{{ $list->user->username }}</div><!--$listに収められている情報->user（メゾット名）->username（カラム名）-->
+                <div class = postUsername>{{ $list->user->username }}</div><!--$listに収められている情報->user（modelに記載されているメゾット名）->username（カラム名）-->
                 <div class = postCreated_at>{{ $list->created_at }}</div>
               </div>
 
@@ -37,7 +37,7 @@
                 <div class= "postButtons">
                   <!--投稿編集前のデフォルトページ-->
                   <!--投稿編集button-->
-                  <a class="js-modal-open" href="" post="{{ $list->post }}" post_id="{{ $list->id }}"><input type="image" src="/images/edit.png"
+                  <a class="js-modal-open" href="" post="{{ $list -> post }}" post_id="{{ $list -> id }}"><input type="image" src="/images/edit.png"
                   name="editButton" width="30px" hight="30px"></a><!--postとpost_idどちらの情報も持たせる-->
 
                   <!--投稿削除button-->

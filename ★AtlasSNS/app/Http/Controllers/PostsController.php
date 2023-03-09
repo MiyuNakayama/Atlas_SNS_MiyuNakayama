@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Validator;//RegisterControllerに記載があっ�
 
 class PostsController extends Controller
 {
-    //新規投稿時のバリデーション設定
+
+//新規投稿時のバリデーション設定
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -21,12 +22,14 @@ class PostsController extends Controller
         ]);
     }
 
-    //登録処理（ブラウザには表示されない）
-    public function textCreate(Request $request){
+//登録処理（ブラウザには表示されない）
+    public function textCreate(Request $request)
+    {
 
         //10/22追加
         $data = $request->input();//ここで$dateを定義してあげないと、->validator($data);で$data使えない
-//dd($data);OK
+        //dd($data);//OK
+
         $validator = $this->validator($data);
             if ($validator->fails()){
                 return redirect('top')//バリデーションに引っ掛かると再度/topが読み込まれるようになっている
@@ -47,20 +50,28 @@ class PostsController extends Controller
         ]);
 
         return redirect('/top');
-
     }
 
 //投稿内容をブラウザに表示させる動き
-    public function index(){
-        //リレーション
-        $list = Post::with("user")->get();
-        //postmodelに書かれている、userメゾットも一緒に情報を取得する
-//dd($list);
-        return view('posts.index',['list'=>$list]);
-        }
+    public function index()
+    {
+        $followed_id = Auth::user()->follows()->pluck('followed_id');
+        //フォローしているユーザーのidを取得
+
+        $list = Post::with("user")
+        ->whereIn('user_id',$followed_id)
+        ->orWhere('user_id',Auth::user()->id)
+        ->latest()
+        ->get();
+        //リレーションを使ってpostモデルに書かれている、userメゾットも一緒に情報を取得する
+        //dd($list);
+        return view('posts.index',compact('list'));
+    }
 
 //update-form(投稿内容の編集・更新)
-        public function updateForm($id){
+
+    public function updateForm($id)
+    {
         $post = \DB::table('posts')
             ->where('id', $id)
             //$idの変数名は、ルーティング上の{id}と同じ名前にする。$numberなら{number}など。など。。
@@ -83,7 +94,7 @@ class PostsController extends Controller
         return redirect('top');
     }
 
-    //投稿削除③
+//投稿削除③
     public function delete($id)
     {
         \DB::table('posts')

@@ -45,15 +45,23 @@ Route::get('/top','PostsController@index');
 
 //1/23追記
 //フォロワー数の表示
-//loginでいいのかな
-Route::get('/login','FollowsController@Follower');
+//URLの指定謎。
+Route::get('/index','FollowsController@Follower');
+//Route::get('/followList','FollowsController@FollowList');
 
 //▼プロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
 
-Route::get('/followList','FollowsController@followList');
+//▼自分以外のuserのプロフィール表示
+Route::post('/followProfile','FollowsController@followsProfile');
 
+//▼フォロー、フォロワーのリスト表示のルーティング
+Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
+
+// //▼フォロー、フォロワーの呟き一覧のルーティング
+// Route::get('/followList','FollowsController@followingPosts');
+// Route::get('/followersList','FollowsController@followedPosts');
 
 //▼新規投稿のルーティングをかく！
 ///text/createは、ブラウザ表示URLではなく、投稿内容登録に使うメゾット名

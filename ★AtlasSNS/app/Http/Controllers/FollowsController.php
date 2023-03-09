@@ -4,30 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Follows;
+use App\User;
 use Auth;
+use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class FollowsController extends Controller
 {
-    //**フォロー、フォロワーの表示
-    public function followList(){
-        return view('follows.followList');
-        //followsディレクトリのfollowList.bladeへ値を渡す
-    }
-    public function followerList(){
-        return view('follows.followerList');
-    }
-
-    // //1/23追記
-    // //まずはフォロワーの数を表示したい。
-    // public function follower(){
-    //     $followers = Follow::get('followed_id');
-
-    //     return redirect('/login');
-    // }
-
 //11/28追記
 //フォロー機能①ボタンの設置(bladeに記載)
-
 //フォロー機能②テーブルへの登録・削除
 //フォローするとき（followテーブルへの登録処理）
     public function follow(Request $request)
@@ -62,4 +47,64 @@ class FollowsController extends Controller
 
         return redirect('/search');
     }
+
+//**フォロー、フォロワーの表示
+
+//自分がフォローしている人の表示
+//自分がフォローしている人の呟きを表示
+    public function followList()
+    {
+        $followList = Auth::user()->follows()->pluck('followed_id');
+        //userモデルに記載されているfollowsメゾットで,followed_idを取得
+        //dd($followList);
+        //3456
+
+        $follow = User::select('*')
+        ->whereIn('id',$followList)
+        ->get();
+        //dd($follow);//値は取れている
+        $followingPosts = Post::select('*')
+        ->whereIn('user_id',$followList)
+        ->latest()
+        ->get();
+
+        return view('follows.followList',compact('follow','followingPosts'));
+        //followsディレクトリのfollowList.bladeへ値を渡す
+        //[]内で変数をviewに渡してあげないと表示ができないぞ
+    }
+
+//自分のフォロワーの表示
+//自分のフォロワーの呟き表示
+    public function followerList(){
+
+        $followerList = Auth::user()->followUsers()->pluck('following_id');
+        //dd($followed_id);
+        //followed_idが取得出来ている
+
+        $follower = User::select('id','username','images')
+        ->whereIn('id',$followerList)
+        ->get();
+        $followerPosts = Post::select('*')
+        ->whereIn('user_id',$followerList)
+        ->latest()
+        ->get();
+
+        return view('follows.followerList',compact('follower','followerPosts'));
+
+    }
+
+//自分以外の人のプロフィール
+    public function followsProfile(Request $request)
+    {
+        $followsName = $request->input();
+
+        $followsUser = \DB::table('users')
+        ->select('id','username','images','bio')
+        ->where('id',$followsName)
+        ->first();
+        //dd($followsUser);//null
+        return view('follows.followProfile',compact('followsUser'));
+    }
+
+
 }

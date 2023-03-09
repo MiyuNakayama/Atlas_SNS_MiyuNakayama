@@ -28,13 +28,13 @@ class User extends Authenticatable
     ];
 
 
-    /*投稿機能、投稿の編集時に使用*/
-    public function posts(){
-    return $this->hasMany('App\Post');
-    //Postテーブルとリレーション
-}
+///*投稿機能、投稿の編集時に使用*/
+    public function posts()
+    {
+    return $this->hasMany('App\Post');//Postテーブルとリレーション
+    }
 
- /*フォローする・はずす時に使用*/
+///*フォローする・はずす時に使用*/
     //11/28追記
     //**フォロー機能のリレーションメゾット
     //リレーションメゾットは、テーブルに繋がっているモデルに記入する
@@ -58,14 +58,16 @@ class User extends Authenticatable
     //12/18追記
     //**判別するメゾット
     //自分がフォローしているかどうか確かめる。→している場合、followsテーブルのfollowed_idに一致する値がある
+
     public function isFollowing(Int $user_id)
     {
         return (boolean) $this->follows()
         ->where('followed_id', $user_id)
-        ->first();
+        ->exists();
     }
     //booleanはブール値。変数の型で、trueかfalseしか入らないらしい。thisで、このページにあるメゾットに飛ぶように指定できる
     //whereで指定したカラムと変数が一致していたら、firstで値を取得する
+
 
     // 自分がフォローされているかどうか確かめる。→されている場合、followsテーブルのfollowing_idに一致する値がある
     public function isFollowed(Int $user_id)

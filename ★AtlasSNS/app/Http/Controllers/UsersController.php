@@ -18,11 +18,9 @@ class UsersController extends Controller
     //ユーザー検索①検索前の全ユーザーの表示
     public function search(){
         $users = User::get();
-        //User::→Userモデルを経由して値をgetしてる
 
         //必ずviewファイルに値をおくってあげる
         return view('users.search',['users'=>$users]);
-        //検索前に送った変数$usersと、検索後の変数$users
     }
 
 //ユーザー検索②usersテーブルで曖昧検索をし、viewに表示
@@ -48,15 +46,11 @@ class UsersController extends Controller
         }
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
          return view('users.search',['users'=> $users,'searchWord'=> $searchWord]);
+         //検索前に送った変数$usersと、検索後の変数$users
     }
 
-    //1/23追記
-    //まずはフォロワーの数を表示したい。
-    public function follower(){
-        $followers = Follows::get('followed_id')->count();
 
-        return redirect('/login');
-    }
+
 
 
 }
