@@ -17,11 +17,8 @@ class FollowsController extends Controller
 //フォローするとき（followテーブルへの登録処理）
     public function follow(Request $request)
     {
-        $user_id = Auth::user()->id;
-        //ログインしてるユーザーの情報を取得
-        $id = $request->input('id');
-        //post送信された内容をfollowsテーブルへ
-
+        $user_id = Auth::user()->id;//ログインしてるユーザーの情報を取得
+        $id = $request->input('id');//post送信された内容をfollowsテーブルへ
         \DB::table('follows')->insert([
             'following_id' => $user_id,
             'followed_id' => $id
@@ -35,9 +32,7 @@ class FollowsController extends Controller
     {
         $user_id = Auth::user()->id;//ログインしてるユーザーの情報（id）を取得
         $followed_id = $request->input('id');//post送信された内容（id）をfollowsテーブルのfollowed_idへぶち込む
-
         //dd($followed_id);
-
         \DB::table('follows')
         ->where('followed_id', $followed_id)//前者がカラム名で、後者が解除したい人のidがぶち込まれたカラム名。
         ->where('following_id', $user_id)
@@ -58,11 +53,10 @@ class FollowsController extends Controller
         //userモデルに記載されているfollowsメゾットで,followed_idを取得
         //dd($followList);
         //3456
-
         $follow = User::select('*')
         ->whereIn('id',$followList)
         ->get();
-        //dd($follow);//値は取れている
+        //dd($follow);//色んな値は取れているidも
         $followingPosts = Post::select('*')
         ->whereIn('user_id',$followList)
         ->latest()
@@ -94,16 +88,19 @@ class FollowsController extends Controller
     }
 
 //自分以外の人のプロフィール
-    public function followsProfile(Request $request)
+//自分がフォローしている人の場合
+//クリックされた画像のidを取得したい
+    public function followProfile(Request $request)
     {
-        $followsName = $request->input();
+        //dd($request);
+        $followId = $request->get('id');
+        dd($followId);
+        $followProfile = User::select('*')
+        ->whereIn('id',$followId)
+        ->get();
+        //dd($followProfile);
 
-        $followsUser = \DB::table('users')
-        ->select('id','username','images','bio')
-        ->where('id',$followsName)
-        ->first();
-        //dd($followsUser);//null
-        return view('follows.followProfile',compact('followsUser'));
+        return view('follows.followProfile',compact('followId','followProfile'));
     }
 
 

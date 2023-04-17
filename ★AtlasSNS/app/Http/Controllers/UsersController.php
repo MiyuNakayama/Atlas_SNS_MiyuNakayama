@@ -9,12 +9,6 @@ use Auth;
 
 class UsersController extends Controller
 {
-
-    public function profile(){
-        $username = User::get();
-        return view('users.profile');
-    }
-
     //ユーザー検索①検索前の全ユーザーの表示
     public function search(){
         $users = User::get();
@@ -39,7 +33,7 @@ class UsersController extends Controller
         {
             $users = User::where('username','like','%'.$searchWord.'%')->get();
             //検索かけたら必ずget()して、結果の値を変数にぶち込みます
-            // dd($users);
+            //dd($users);
         }
         else{
             $users = User::get();//検索して該当するユーザーがない場合は再度全選択する
@@ -49,8 +43,11 @@ class UsersController extends Controller
          //検索前に送った変数$usersと、検索後の変数$users
     }
 
-
-
+//自分のプロフィールの表示
+    public function profile()
+    {
+        return view('users.profile');
+    }
 
 
 }

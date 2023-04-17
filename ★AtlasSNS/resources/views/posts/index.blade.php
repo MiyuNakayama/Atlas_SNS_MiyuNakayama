@@ -42,7 +42,7 @@
 
                   <!--投稿削除button-->
                   <!--投稿削除①削除ボタンをおす→はいを選択する-->
-                  <a class="deleteButton" href="/post/{{$list->id}}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
+                  <a class="deleteButton" href="/post/{{ $list -> id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
                     <input type="image" src="/images/trash.png" name="trashButton" width="30px" hight="30px">
                   </a>
                 </div>
@@ -56,7 +56,8 @@
           <div class="modal__bg js-modal-close"></div>
           <div class="modal__content">
             <!--投稿編集①更新内容が送られる。データはweb.phpにいくよ-->
-            <form action="/update" method="post"><!--↑ここのURLの指定は自由でOK。今回は/updateにしたよ。送り方はpost送信。-->
+            <form action="/update" method="post">
+              <!--↑ここのURLの指定は自由でOK。今回は/updateにしたよ。送り方はpost送信。-->
                 <textarea name="upPost" class="modal_post"></textarea>
                 <input type="hidden" name="id" class="modal_id" value="">
                 <input type="image" src="/images/edit.png" name="editButton" width="30px" hight="30px">

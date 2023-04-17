@@ -49,15 +49,15 @@ Route::get('/top','PostsController@index');
 Route::get('/index','FollowsController@Follower');
 //Route::get('/followList','FollowsController@FollowList');
 
-//▼プロフィール表示のためのルーティング
+//▼自分のプロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
-
-//▼自分以外のuserのプロフィール表示
-Route::post('/followProfile','FollowsController@followsProfile');
 
 //▼フォロー、フォロワーのリスト表示のルーティング
 Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
+
+//▼自分以外のuserのプロフィール表示
+Route::get('/post/followProfile','FollowsController@followProfile');
 
 // //▼フォロー、フォロワーの呟き一覧のルーティング
 // Route::get('/followList','FollowsController@followingPosts');
@@ -69,12 +69,13 @@ Route::post('/text/create', 'PostsController@textCreate');
 
 //10/10追記
 //ブラウザに表示させる動き
-//postmodelに書かれている、userメゾットも一緒に情報を取得するよ
+//postメゾットに書かれている、userメゾットも一緒に情報を取得するよ
 Route::post('/post/user', 'PostsController@postUser');
 
 //10/22追記
 //投稿内容の編集・更新
 Route::get('/post/{id}/updateForm', 'PostsController@updateForm');
+
 //11/8追記
 //投稿編集②formでおくされてきた投稿内容を処理するメゾットを決める。PostsControllerへ行くよ
 Route::post('/update','PostsController@update');
@@ -83,10 +84,10 @@ Route::post('/update','PostsController@update');
 //投稿の削除
 Route::get('/post/{id}/delete', 'PostsController@delete');
 
-
 //11/17追記
 //ユーザー検索①ページの全ユーザーの表示
 Route::get('/search','UsersController@search');
+
 //11/12追記
 //ユーザー検索②DBから曖昧検索されたワードを探す
 //ユーザー検索③検索窓横の検索ワードの表示
@@ -96,6 +97,7 @@ Route::get('/wordSearch','UsersController@wordSearch');
 //**フォロー機能
 //フォローする
 Route::post('/follow','FollowsController@follow');
+
 //12/18追記
 //フォロー外す
 Route::post('/unFollow','FollowsController@unFollow');
