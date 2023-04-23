@@ -4,7 +4,7 @@
 <div class = "profile">
 
   <h2>user name</h2>
-  <form action="/profile" method = POST>
+  <form action="/profileUpdate" method = POST>
     <input type ="text" name="edit_userName" value ="{{ Auth::user()->username }}" >
 
   <h2>mail adress</h2>

@@ -25,7 +25,6 @@ class PostsController extends Controller
 //登録処理（ブラウザには表示されない）
     public function textCreate(Request $request)
     {
-
         //10/22追加
         $data = $request->input();//ここで$dateを定義してあげないと、->validator($data);で$data使えない
         //dd($data);//OK

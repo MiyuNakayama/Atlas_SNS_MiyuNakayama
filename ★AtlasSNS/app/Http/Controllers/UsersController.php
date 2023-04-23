@@ -50,4 +50,16 @@ class UsersController extends Controller
     }
 
 
+    public function profileUpdate(Request $request)
+    {
+        $profileUpdate = $request->input();
+        //書き途中眠い寝る
+
+        return view('posts.index');
+
+    }
+
+//自分のプロフィールの表示
+
+
 }

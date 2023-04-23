@@ -57,7 +57,7 @@ Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
 
 //▼自分以外のuserのプロフィール表示
-Route::get('/post/followProfile','FollowsController@followProfile');
+Route::get('/followProfile','FollowsController@followProfile');
 
 // //▼フォロー、フォロワーの呟き一覧のルーティング
 // Route::get('/followList','FollowsController@followingPosts');

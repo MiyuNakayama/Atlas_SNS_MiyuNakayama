@@ -93,10 +93,11 @@ class FollowsController extends Controller
     public function followProfile(Request $request)
     {
         //dd($request);
-        $followId = $request->get('id');
-        dd($followId);
-        $followProfile = User::select('*')
-        ->whereIn('id',$followId)
+        //画像登録してないと永遠にid取れないとかあるのかな
+        $followId = $request->get('followId');
+        //dd($followId);
+        $followProfile = User::select('id','username','bio')
+        ->where('id',$followId)
         ->get();
         //dd($followProfile);
 
