@@ -96,12 +96,12 @@ header {
 }
 
 .ac-child {
-    /*閉じているとき*/
+    /*アコーディオン閉じているとき*/
     display: none;
 }
 
 .ac-child.active {
-    /*開いているとき*/
+    /*アコーディオン開いているとき*/
     display: block;
     width: 0 0 19%;
     background-color: #fff;
@@ -176,9 +176,6 @@ textarea {
 }
 
 /*.display-containerについてはすでにlogin.bladeの作成時に記載済みなのでここでは記載しない*/
-
-.p {}
-
 .postUsername {
     display: flex;
     padding-top: 10px;
@@ -276,4 +273,17 @@ textarea {
 .allUsername {
     /* text-align: center;
     display: inline-block; */
+}
+
+/***followProfile***/
+.followProfile {
+    display: flex;
+}
+
+.followProfileMain {
+    display: flex;
+}
+
+.followProfilePosts {
+    display: flex;
 }

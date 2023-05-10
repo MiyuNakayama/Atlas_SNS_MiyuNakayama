@@ -57,7 +57,7 @@ Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
 
 //▼自分以外のuserのプロフィール表示
-Route::get('/followProfile','FollowsController@followProfile');
+Route::post('/followProfile','FollowsController@followProfile');
 
 // //▼フォロー、フォロワーの呟き一覧のルーティング
 // Route::get('/followList','FollowsController@followingPosts');
@@ -95,12 +95,17 @@ Route::get('/wordSearch','UsersController@wordSearch');
 
 //11/28追記
 //**フォロー機能
-//フォローする
+///search.bladeでフォローする
 Route::post('/follow','FollowsController@follow');
-
 //12/18追記
-//フォロー外す
+///search.bladeでフォロー外す
 Route::post('/unFollow','FollowsController@unFollow');
+
+///followProfile.bladeでフォローする
+Route::post('/followProfile','FollowsController@followProfile');
+///followProfile.bladeでフォロー外す
+Route::post('/profileUnFollow','FollowsController@profileUnFollow');
+
 
 });
 

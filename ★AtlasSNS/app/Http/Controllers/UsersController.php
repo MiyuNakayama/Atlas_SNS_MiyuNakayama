@@ -22,12 +22,10 @@ class UsersController extends Controller
 //②と同様のメゾットを使用する
     public function wordSearch(Request $request)
     {
-    //dd($request);
-
+        //dd($request);
         $searchWord = $request->input('searchWord');
         //inputされた中身は検索にかけられたsearchWordが入っているはず。。
-
-    //dd($searchWord);
+        //dd($searchWord);
 
         if(isset($searchWord))
         {
@@ -49,17 +47,28 @@ class UsersController extends Controller
         return view('users.profile');
     }
 
-
     public function profileUpdate(Request $request)
     {
         $profileUpdate = $request->input();
         //書き途中眠い寝る
 
         return view('posts.index');
-
     }
 
-//自分のプロフィールの表示
+//フォロー機能
+    // public function update(Request $request)
+    // {
+    //     // dd($request);
+    //     $id = $request->input('id');
+    //     $up_post = $request->input('upPost');
+    //     \DB::table('posts')
+    //         ->where('id', $id)
+    //         ->update(
+    //             ['post' => $up_post]
+    //         );//->update[]ここでDBの内容を更新している！
+
+    //     return redirect('top');
+    // }
 
 
 }

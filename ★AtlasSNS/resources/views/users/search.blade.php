@@ -26,7 +26,6 @@
 
   <!-- フォロー機能①フォローする、フォローを外すボタンの設置 -->
   <!-- どちらのボタンも作成し、その後正しい方を表示させる！ -->
-
 <!--if(条件①ログインユーザーのidが、following_idと一致 && followed_idが、$user->idと一致)else(条件①以外の場合)-->
 @if(Auth::user()->isFollowing($user->id))
 <form action="/unFollow" method ="POST">

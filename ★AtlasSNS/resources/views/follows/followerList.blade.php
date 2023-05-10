@@ -17,14 +17,23 @@
 </div>
 
 <div>
-  <h2>フォロワーのアイコン一覧と、呟きの一覧が出て欲しい</h2>
+  <h2>FollowerList:アイコン一覧</h2>
   @foreach ( $follower  as $follower )
-  <img src="{{ asset($follower->images) }}">
+  <form action="/followProfile" method="post">
+    @csrf
+    <input type="hidden" name="followId" value="{{  $follower -> id }}">
+    <button id = "following"><img src="{{ asset($follower -> images) }}" ></button>
+  </form>
   @endforeach
-
-  <h2>ここにフォロワーの呟き一覧（一旦usernameと呟き表示したい）</h2>
+</div>
+<div>
+  <h2>ここにフォロワーの呟き一覧</h2>
   @foreach ( $followerPosts as $followerPosts )
-  <img src="{{ asset($follower->images) }}">
+  <form action="/followProfile" method="post">
+    @csrf
+    <input type="hidden" name="followId" value="{{  $follower -> id }}">
+    <button id = "following"><img src="{{ asset($follower -> images) }}" ></button>
+  </form>
   <h2>名前：{{ $follower->username }}</h2>
   <h2>投稿内容：{{ $followerPosts->post }}</h2>
   <p>投稿時刻：{{ $followerPosts->updated_at }}</p>

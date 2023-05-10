@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class FollowsController extends Controller
 {
+
 //11/28追記
-//フォロー機能①ボタンの設置(bladeに記載)
+//**/search.bladeでのフォロー機能①ボタンの設置(bladeに記載)
 //フォロー機能②テーブルへの登録・削除
 //フォローするとき（followテーブルへの登録処理）
     public function follow(Request $request)
@@ -43,8 +44,36 @@ class FollowsController extends Controller
         return redirect('/search');
     }
 
-//**フォロー、フォロワーの表示
+//*/followProfile.bladeでのフォロー機能①ボタンの設置(bladeに記載)
+//フォローする
+    public function profileFollow(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $id = $request->input('id');
 
+        \DB::table('follows')
+        ->insert([
+            'following_id' => $user_id,
+            'followed_id' => $id
+        ]);
+
+        return redirect('/followProfile');
+    }
+//フォローはずす
+    public function profileUnFollow(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $followed_id = $request->input('id');
+
+        \DB::table('follows')
+        ->where('followed_id', $followed_id)
+        ->where('following_id', $user_id)
+        ->delete();
+
+        return redirect('/followProfile');
+    }
+
+//**フォロー、フォロワーの表示
 //自分がフォローしている人の表示
 //自分がフォローしている人の呟きを表示
     public function followList()
@@ -93,16 +122,20 @@ class FollowsController extends Controller
     public function followProfile(Request $request)
     {
         //dd($request);
-        //画像登録してないと永遠にid取れないとかあるのかな
-        $followId = $request->get('followId');
+        $followId = $request->input('followId');
         //dd($followId);
-        $followProfile = User::select('id','username','bio')
+        $followProfile = DB::table('users')
+        ->select('id','username','bio','images')
         ->where('id',$followId)
-        ->get();
+        ->first();
         //dd($followProfile);
 
-        return view('follows.followProfile',compact('followId','followProfile'));
-    }
+        $followPost = DB::table('posts')
+        ->select('user_id','post','created_at')
+        ->where('user_id',$followId)
+        ->get();
 
+        return view('follows.followProfile',compact('followId','followProfile','followPost'));
+    }
 
 }
