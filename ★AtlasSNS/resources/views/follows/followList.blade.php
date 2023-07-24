@@ -16,31 +16,30 @@
 <div>
 </div>
 
-<div class = "followList_icon">
+<div class ="listIcon">
   <h2>FollowList:アイコン一覧</h2>
+  <div class="listIcon">
   @foreach($follow as $follow)
-  <form action="/followProfile" method="post">
-    @csrf
-    <input type="hidden" name="followId" value="{{  $follow -> id }}">
-    <button id = "following"><img src="{{ asset($follow -> images) }}" ></button>
-  </form>
+<a href ="/followProfile/{{ $follow -> id }}">
+  <img src="{{ asset($follow -> images) }}" ></a>
   @endforeach
+  </div>
 </div>
 
-<div class = "followList_posts">
-  <h2>ここにフォローしている人の呟き一覧を表示したい</h2>
+<div class = "listPosts">
+  @foreach( $followingPosts as $followingPosts )
 
-  @foreach($followingPosts as $followingPosts)
-<form action="/followProfile" method="post">
-    @csrf
-    <input type="hidden" name="followId" value="{{  $follow -> id }}">
-    <button id = "following"><img src="{{ asset($follow -> images) }}" ></button>
-</form>
-  <p>名前：{{ $followingPosts->user->username }}</p>
-  <p>投稿内容：{{ $followingPosts->post }}</p>
-  <p>投稿時刻：{{ $followingPosts->updated_at }}</p>
+<div class="postsIcon">
+    <a href="/followProfile/{{ $follow -> id }}"><img src="{{ asset($follow -> images) }}" ></a>
+  </div>
+
+  <div class="followPosts">
+    <h2>名前：{{ $followingPosts->user->username }}</h2>
+    <h2>投稿内容：{{ $followingPosts->post }}</h2>
+    <h2>投稿時刻：{{ $followingPosts->updated_at }}</h2>
+  </div>
+
   @endforeach
-
 </div>
 
 @endsection

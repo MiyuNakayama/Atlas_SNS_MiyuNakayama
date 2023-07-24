@@ -275,6 +275,27 @@ textarea {
     display: inline-block; */
 }
 
+/***followList***/
+/***followerList***/
+.listPosts {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+
+.listIcon {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: 150px;
+}
+
+.followerPosts {
+    flex-direction: column-reverse;
+}
+
+.postsIcon {}
+
 /***followProfile***/
 .followProfile {
     display: flex;

@@ -33,7 +33,8 @@ class UsersController extends Controller
             //検索かけたら必ずget()して、結果の値を変数にぶち込みます
             //dd($users);
         }
-        else{
+        else
+        {
             $users = User::get();//検索して該当するユーザーがない場合は再度全選択する
         }
         //②の検索結果で使うusersと、③の上記で使うsearchWordを同時にviewに渡す
@@ -47,28 +48,34 @@ class UsersController extends Controller
         return view('users.profile');
     }
 
+//プロフィールの更新
     public function profileUpdate(Request $request)
     {
-        $profileUpdate = $request->input();
-        //書き途中眠い寝る
-
-        return view('posts.index');
+        $profileUpdate = $request->input('users');
+        dd($request);
+        \DB::table('users')->insert([
+            'edit_userName' => $username,
+            'edit_mailAdress' => $mail,
+            'edit_bio' => $bio
+        ]);
+            return redirect('/top');
     }
 
-//フォロー機能
-    // public function update(Request $request)
-    // {
-    //     // dd($request);
-    //     $id = $request->input('id');
-    //     $up_post = $request->input('upPost');
-    //     \DB::table('posts')
-    //         ->where('id', $id)
-    //         ->update(
-    //             ['post' => $up_post]
-    //         );//->update[]ここでDBの内容を更新している！
 
-    //     return redirect('top');
-    // }
+//自分のプロフィール画像の表示
+    public function upimg(Request $request)
+    {
+        $dir = 'images';
+        //保存先のディレクトリを指定
+
+        $fileName = $request->file('image')->getClientOriginalName();
+        //画像の名前を取得
+        $profileUpdate = $request->file('image')->store('public/' . $dir,$fileName);
+        //取得した画像の名前で指定したディレクトリに保存される
+
+        return view('posts.index');
+        // return redirect('/');
+    }
 
 
 }

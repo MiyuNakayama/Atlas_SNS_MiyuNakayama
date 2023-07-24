@@ -22,15 +22,18 @@
         <!--プロフィール表示のフォローボタン-->
         <!--if(条件①ログインユーザーのidが、following_idと一致 && followed_idが、$followProfile->idと一致)else(条件①以外の場合)-->
         @if(Auth::user()->isFollowing($followProfile->id))
-        <!--User.phpのisFollowing()メゾットでfollowed_idを取得出来るため利用する-->
-        <form action="/profileUnFollow" method ="POST">
+        <!--User.phpのisFollowing()メゾットでfollowed_idが取得出来るため利用する-->
+
+        <form action="/unFollow" method ="post"><!--ここのメゾットはgetにする-->
             <input type ="submit" name ="profileUnFollow" value ="フォロー解除する">
+            <!--name属性いらない-->
             <input type="hidden" name="id" value= "{{$followProfile->id}}" class="followsButton">
+            <!--aタグでid載せて-->
             {{ csrf_field() }}
         </form>
         @else
-        <form action="/profileFollow" method ="POST">
-            <input type ="submit" name ="profileFollow" value ="フォローする" >
+        <form action="/follow" method ="post"><!--ここのメゾットはgetにする-->
+            <input type ="submit" name ="profileFollow" value ="フォローする">
             <input type="hidden" name="id" value= "{{$followProfile->id}}" class="followsButton">
             {{ csrf_field() }}
         </form>

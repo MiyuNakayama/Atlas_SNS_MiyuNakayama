@@ -36,7 +36,6 @@ Route::post('/added', 'Auth\RegisterController@added');
 
 });
 
-
 //▼ログイン中のページ
 //middlewareで、認証Authされているユーザーしか閲覧ができない設定にする
 Route::group(['middleware' => 'auth'], function () {
@@ -51,17 +50,15 @@ Route::get('/index','FollowsController@Follower');
 
 //▼自分のプロフィール表示のためのルーティング
 Route::get('/profile','UsersController@profile');
+//プロフィールの更新
+Route::post('/profile/Update','UsersController@profileUpdate');
 
 //▼フォロー、フォロワーのリスト表示のルーティング
 Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
 
 //▼自分以外のuserのプロフィール表示
-Route::post('/followProfile','FollowsController@followProfile');
-
-// //▼フォロー、フォロワーの呟き一覧のルーティング
-// Route::get('/followList','FollowsController@followingPosts');
-// Route::get('/followersList','FollowsController@followedPosts');
+Route::get('/followProfile/{id}','FollowsController@followProfile');
 
 //▼新規投稿のルーティングをかく！
 ///text/createは、ブラウザ表示URLではなく、投稿内容登録に使うメゾット名
@@ -100,12 +97,12 @@ Route::post('/follow','FollowsController@follow');
 //12/18追記
 ///search.bladeでフォロー外す
 Route::post('/unFollow','FollowsController@unFollow');
+///ここでどっちのページでも使えるようにする
 
-///followProfile.bladeでフォローする
-Route::post('/followProfile','FollowsController@followProfile');
-///followProfile.bladeでフォロー外す
-Route::post('/profileUnFollow','FollowsController@profileUnFollow');
-
+// ///followProfile.bladeでフォローする
+// Route::post('/profileFollow','FollowsController@profileFollow');
+// ///followProfile.bladeでフォロー外す
+// Route::post('/profileUnFollow','FollowsController@profileUnFollow');
 
 });
 

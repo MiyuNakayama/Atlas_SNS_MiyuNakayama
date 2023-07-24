@@ -26,12 +26,14 @@ class PostsController extends Controller
     public function textCreate(Request $request)
     {
         //10/22追加
-        $data = $request->input();//ここで$dateを定義してあげないと、->validator($data);で$data使えない
+        $data = $request->input();
+        //ここで$dateを定義してあげないと、->validator($data);で$data使えない
         //dd($data);//OK
 
         $validator = $this->validator($data);
             if ($validator->fails()){
-                return redirect('top')//バリデーションに引っ掛かると再度/topが読み込まれるようになっている
+                return redirect('top')
+                //バリデーションに引っ掛かると再度/topが読み込まれるようになっている
                 ->withErrors($validator)
                 ->withInput();
                 //$validator = $this->validator($data);の$validatorは、一旦記述してあげないとエラーが出てしまうので記述する。

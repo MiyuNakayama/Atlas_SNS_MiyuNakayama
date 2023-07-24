@@ -25,7 +25,7 @@ class FollowsController extends Controller
             'followed_id' => $id
         ]);//ここでテーブルにインサートする
 
-        return redirect('/search');
+        return back();
     }
 
 //フォローはずすとき（followテーブルへの削除処理）
@@ -41,36 +41,7 @@ class FollowsController extends Controller
         //2つ目のwhere（条件）がないと、1つ目の条件が一致してるもの全部消える笑
         ->delete();
 
-        return redirect('/search');
-    }
-
-//*/followProfile.bladeでのフォロー機能①ボタンの設置(bladeに記載)
-//フォローする
-    public function profileFollow(Request $request)
-    {
-        $user_id = Auth::user()->id;
-        $id = $request->input('id');
-
-        \DB::table('follows')
-        ->insert([
-            'following_id' => $user_id,
-            'followed_id' => $id
-        ]);
-
-        return redirect('/followProfile');
-    }
-//フォローはずす
-    public function profileUnFollow(Request $request)
-    {
-        $user_id = Auth::user()->id;
-        $followed_id = $request->input('id');
-
-        \DB::table('follows')
-        ->where('followed_id', $followed_id)
-        ->where('following_id', $user_id)
-        ->delete();
-
-        return redirect('/followProfile');
+        return back();
     }
 
 //**フォロー、フォロワーの表示
@@ -119,23 +90,50 @@ class FollowsController extends Controller
 //自分以外の人のプロフィール
 //自分がフォローしている人の場合
 //クリックされた画像のidを取得したい
-    public function followProfile(Request $request)
+    public function followProfile($id)
     {
-        //dd($request);
-        $followId = $request->input('followId');
-        //dd($followId);
+        //dd($id);
         $followProfile = DB::table('users')
         ->select('id','username','bio','images')
-        ->where('id',$followId)
+        ->where('id',$id)
         ->first();
         //dd($followProfile);
 
         $followPost = DB::table('posts')
         ->select('user_id','post','created_at')
-        ->where('user_id',$followId)
+        ->where('user_id',$id)
         ->get();
 
-        return view('follows.followProfile',compact('followId','followProfile','followPost'));
+        return view('follows.followProfile',compact('followProfile','followPost'));
     }
+
+//*/followProfile.bladeでのフォロー機能①ボタンの設置(bladeに記載)
+//フォローする
+//     public function profileFollow(Request $request)
+//     {
+//         $user_id = Auth::user()->id;
+//         $id = $request->input('id');
+
+//         \DB::table('follows')
+//         ->insert([
+//             'following_id' => $user_id,
+//             'followed_id' => $id
+//         ]);
+
+//         return redirect('/followProfile');
+//     }
+// //フォローはずす
+//     public function profileUnFollow(Request $request)
+//     {
+//         $user_id = Auth::user()->id;
+//         $followed_id = $request->input('id');
+
+//         \DB::table('follows')
+//         ->where('followed_id', $followed_id)
+//         ->where('following_id', $user_id)
+//         ->delete();
+
+//         return redirect('/followProfile');
+//     }
 
 }
